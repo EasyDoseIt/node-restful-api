@@ -1,0 +1,33 @@
+{
+  "name": "easy-dose-it-be",
+  "version": "1.0.0",
+  "description": "Easy Dose It Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasyDoseIt/easy-dose-it-be.git"
+  },
+  "author": "Emma Zarate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EasyDoseIt/easy-dose-it-be/issues"
+  },
+  "homepage": "https://github.com/EasyDoseIt/easy-dose-it-be#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.13",
+    "pg": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
