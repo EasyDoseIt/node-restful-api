@@ -1,6 +1,7 @@
+require('dotenv').config();
 const cors = require('cors');
 
-const server = require("./server");
+const server = require("./api/server.js");
 
 const dbPort = process.env.DB_PORT;
 
