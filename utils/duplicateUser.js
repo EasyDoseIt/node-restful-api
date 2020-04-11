@@ -11,6 +11,6 @@ module.exports = (req, res, next) =>
             })
         .catch(err => 
             {
-                res.status(500).json({ errorMessage: 'Internal Error: Could not retrieve users' })
+                res.status(500).json({ errorMessage: 'Internal Error: Could not retrieve users', systemError: err })
             })
 }
