@@ -25,10 +25,11 @@ exports.up = function(knex) {
         tbl.boolean('negative_effect').defaultTo(false)
         tbl.integer('strain_id').unsigned().references('id').inTable('strains').onDelete('CASCADE').onUpdate('CASCADE')
     })
-    .createTable('favorite_strains', tbl => 
+    .createTable('user_strains', tbl => 
     {
         tbl.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE')
         tbl.integer('strain_id').unsigned().references('id').inTable('strains').onDelete('CASCADE').onUpdate('CASCADE')
+        tbl.boolean('favorite').defaultTo(false)
     })
     .createTable('sessions', tbl =>
     {
@@ -51,7 +52,10 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('users')
-        .dropTableIfExists('strains')
+        .dropTableIfExists('categories')
+        .dropTableIfExists('effects')
+        .dropTableIfExists('user_strains')
         .dropTableIfExists('sessions')
+        .dropTableIfExists('strains')
+        .dropTableIfExists('users')
 };
