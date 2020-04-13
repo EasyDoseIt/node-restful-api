@@ -16,8 +16,7 @@ exports.up = function(knex) {
         tbl.string('strain_name', 255).notNullable()
         tbl.string('strain_type')
         tbl.string('product_type')
-        tbl.binary('image')      
-        tbl.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE')
+        tbl.binary('image')   
     })
     .createTable('effects', tbl => 
     {   
