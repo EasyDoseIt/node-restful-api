@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const authRouter = require('../auth/authRouter.js');
+const strainsRouter = require('../user/strains/strainsRouter.js');
 
 
 const server = express();
@@ -11,6 +12,7 @@ server.use(helmet());
 server.use(express.json());
 
 server.use('/api/auth', authRouter)
+server.use('/api/strains', strainsRouter)
 server.use('/api/docs', express.static('./docs'))
 
 server.get('/', (req, res) => {
