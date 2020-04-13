@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
     development: {
       client: "pg",
@@ -9,9 +10,6 @@ module.exports = {
       seeds: {
         directory: "./database/seeds"
     
-      },
-      seeds: {
-        directory: "./database/seeds"
       }
     },
     testing: {
