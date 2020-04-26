@@ -13,19 +13,21 @@ exports.up = function(knex) {
     .createTable('strains', tbl => 
     {
         tbl.increments()
-        tbl.string('strain_name', 255).notNullable()
+        tbl.string('strain_name', 255).notNullable().unique()
         tbl.string('strain_type')
         tbl.string('product_type')
         tbl.binary('image')   
     })
     .createTable('effects', tbl => 
     {   
-        tbl.string('feeling', 180)
+        tbl.increments()
+        tbl.string('feeling', 180).notNullable()
         tbl.boolean('negative_effect').defaultTo(false)
         tbl.integer('strain_id').unsigned().references('id').inTable('strains').onDelete('CASCADE').onUpdate('CASCADE')
     })
     .createTable('user_strains', tbl => 
-    {
+    {   
+        tbl.increments()
         tbl.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE')
         tbl.integer('strain_id').unsigned().references('id').inTable('strains').onDelete('CASCADE').onUpdate('CASCADE')
         tbl.boolean('favorite').defaultTo(false)
@@ -33,7 +35,7 @@ exports.up = function(knex) {
     .createTable('sessions', tbl =>
     {
         tbl.increments()
-        tbl.string('session_name', 255)
+        tbl.string('session_name', 255).notNullable()
         tbl.date('session_date')
         tbl.float('dose_size', [6, 3])
         tbl.string('dose_type')
