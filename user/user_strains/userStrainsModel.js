@@ -5,7 +5,7 @@ module.exports =
     getAll,
     getById,
     add,
-    // del
+    del
 }
 
 function getAll(user_id)
@@ -32,3 +32,5 @@ function add(user_strain)
         .into('user_strains')
         .then(_=> db('strains'))
 }
+
+function del(strain_id) { return db('user_strains').del().where({strain_id}) }

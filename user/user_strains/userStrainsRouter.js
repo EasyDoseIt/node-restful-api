@@ -34,4 +34,18 @@ router.post('/', restricted, (req, res) =>
         })
 })
 
+router.delete('/', restricted, (req, res) =>
+{
+    const id = req.body.id
+    Strains.del(id)
+    .then(_=>
+        {
+            res.status(200).json({successMessage: "Strain deleted", strainDeleted: req.body})
+        })
+    .catch(err =>
+        {
+            res.status(500).json({errorMessage: "Strain could not be deleted", systemError: err})
+        })
+})
+
 module.exports = router;
