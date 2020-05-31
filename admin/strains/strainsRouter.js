@@ -17,6 +17,26 @@ router.get('/all_strains', restricted, (req, res) =>
         })
 });
 
+router.get('/:strain_id', restricted, (req, res) =>
+{
+    const id = req.params.strain_id
+    
+    Strains.getById(id)
+    .then(strain=>
+        {   if ( strain.length === 0)
+            {
+                res.status(200).json({successMessage: "No strains with that ID found"})
+            } else
+            {
+                res.status(200).json({successMessage: `Strain of id: ${id} retrieved`, strainRetrieved: strain})
+            }
+        })
+    .catch(err =>
+        {
+            res.status(500).json({errorMessage: 'Could not retrieve strain', systemError: err})
+        })
+});
+
 router.post('/add', restricted, (req, res) => 
 {   // TODO: Error handling for existing strains
     Strains.addStrain(req.body)
@@ -29,6 +49,8 @@ router.post('/add', restricted, (req, res) =>
         })
 });
 
+//----- Admin Access Only -----
+
 router.delete('/del', restricted, (req, res) => 
 {
     id = req.body.id
@@ -40,8 +62,6 @@ router.delete('/del', restricted, (req, res) =>
         res.status(500).json({ errorMessage: 'Item could note be delted', systemError: err})
     })
 });
-
-//----- Admin Access Only -----
 
 router.put('/:strain_id', restricted, (req, res) =>
 {   // TODO: Make Admin role function only and separate admin from user routes
