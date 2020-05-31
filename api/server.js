@@ -18,6 +18,7 @@ server.use('/api/auth', authRouter);
 server.use('/api/stash', userStrainRouter);
 server.use('/api/strains', strainsRouter);
 server.use('/api/effects', effectsRouter);
+server.use('/api/sessions', sessionsRouter);
 server.use('/api/docs', express.static('./docs'));
 
 server.get('/', (req, res) => {
