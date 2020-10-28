@@ -9,20 +9,21 @@ module.exports =
 }
 
 function getAll(user_id)
-{   // TODO: add strain effects
+{   
     return db('user_strains as u_s')
         .join('strains as s', 's.id', '=', 'u_s.strain_id')
-        .select('s.strain_name', 's.strain_type', 's.image', 's.product_type', 's.image' )
+        // .join('effects as e', 'e.user_strain_id', '=', 'u_s.id') user_strain_id is limiting returned results to only those strains whose ids are in effects
+        // .select('s.strain_name', 's.strain_type', 's.image', 's.product_type', 's.image', 'e.feeling', 'e.negative_effect', 'e.user_strain_id' )
         .where({ 'u_s.user_id': user_id })
 }
 
-function getById(id) { return db('user_strains').where({id}) }
-
-function getUserStrainEffects(strain_id)
-{ // TODO: Handle effects requests
-    return db('effects as e')
-        .join('strains as s', 's.id', '=', 'e.strain_id')
-        .where({ 's.id': strain_id })
+function getById(id)
+{
+    return db('user_strains as u_s')
+        .join('effects as e', 'e.user_strain_id', '=', 'u_s.id')
+        .join('strains as s', 's.id', '=', 'u_s.strain_id')
+        .select('s.strain_name', 's.strain_type', 's.product_type', 's.image', 'e.feeling', 'e.negative_effect' )
+        .where({ 'u_s.user_id': id })
 }
 
 function add(user_strain)
