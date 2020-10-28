@@ -18,19 +18,19 @@ exports.up = function(knex) {
         tbl.string('product_type')
         tbl.binary('image')   
     })
-    .createTable('effects', tbl => 
-    {   
-        tbl.increments()
-        tbl.string('feeling', 180).notNullable()
-        tbl.boolean('negative_effect').defaultTo(false)
-        tbl.integer('strain_id').unsigned().references('id').inTable('strains').onDelete('CASCADE').onUpdate('CASCADE')
-    })
     .createTable('user_strains', tbl => 
     {   
         tbl.increments()
         tbl.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE')
         tbl.integer('strain_id').unsigned().references('id').inTable('strains').onDelete('CASCADE').onUpdate('CASCADE')
         tbl.boolean('favorite').defaultTo(false)
+    })
+    .createTable('effects', tbl => 
+    {   
+        tbl.increments()
+        tbl.string('feeling', 180).notNullable()
+        tbl.boolean('negative_effect').defaultTo(false)
+        tbl.integer('user_strain_id').unsigned().references('id').inTable('user_strains').onDelete('CASCADE').onUpdate('CASCADE')
     })
     .createTable('sessions', tbl =>
     {
@@ -47,7 +47,7 @@ exports.up = function(knex) {
     {
         tbl.increments()
         tbl.string('category_name')
-        tbl.integer('strain_id').unsigned().references('id').inTable('strains').onDelete('CASCADE').onUpdate('CASCADE')
+        tbl.integer('user_strain_id').unsigned().references('id').inTable('user_strains').onDelete('CASCADE').onUpdate('CASCADE')
     })
 };
 
